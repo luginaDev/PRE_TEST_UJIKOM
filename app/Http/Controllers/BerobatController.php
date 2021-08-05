@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Berobat;
 use Illuminate\Http\Request;
-
+use Redirect;
 class BerobatController extends Controller
 {
     /**
@@ -16,6 +16,18 @@ class BerobatController extends Controller
     {
         $data =  Berobat::all();
         return view('berobat.index', compact('data'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function laporanBerobat()
+    {
+        $data =  Berobat::with('dokter', 'pasien')->get();
+        //return dd($data);
+        return view('berobat.laporan', compact('data'));
     }
 
     /**
@@ -36,7 +48,11 @@ class BerobatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $berobat = $request->all();
+        $berobat = new Berobat();
+        $request->save();
+        return Redirect::back()->withErrors(['msg', 'Transaction was successfully added']);
     }
 
     /**
@@ -70,7 +86,7 @@ class BerobatController extends Controller
      */
     public function update(Request $request, Berobat $berobat)
     {
-        //
+        // update belum
     }
 
     /**
@@ -81,6 +97,8 @@ class BerobatController extends Controller
      */
     public function destroy(Berobat $berobat)
     {
-        //
+        $berobat =  Berobat::findOrFail($berobat);
+        $berobat->delete();
+        return Redirect::back()->withErrors(['msg', 'Transaction was successfully deleted']);
     }
 }

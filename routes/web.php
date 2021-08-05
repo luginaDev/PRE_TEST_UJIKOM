@@ -23,3 +23,4 @@ Route::resource('/DataDokter', 'DokterController');
 Route::resource('/DataPoli', 'PoliController');
 Route::resource('/DataBerobat', 'BerobatController');
 Route::get('/LaporanDokter', 'DokterController@reportDokter')->name('laporanDokter');
+Route::get('/LaporanBerobat', 'BerobatController@laporanBerobat')->name('laporanBerobat');

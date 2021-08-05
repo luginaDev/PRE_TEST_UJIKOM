@@ -75,10 +75,9 @@
         <main class="py-4">
             <div class="row">
                 @include('layouts.sidebar')
-                <div class="col-md-6">
+                <div class="col-md-8">
                     @yield('content')        
                 </div>
-                
             </div>
            
             
